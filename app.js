@@ -4,17 +4,20 @@ var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
-var mongoose = require('mongoose');
+
 var expressHbs = require('express-handlebars');
+var mongoose = require('mongoose');
 var session = require('express-session');
 var passport = require('passport');
 var flash = require('connect-flash');
+var validator = require('express-validator');
 var index = require('./routes/index');
 var users = require('./routes/users');
 
 
 var app = express();
 mongoose.connect('localhost: 27017/test');
+require('./config/passport');
 // view engine setup
 app.engine('.hbs', expressHbs({extname: '.hbs'}));
 app.set('views', path.join(__dirname, 'views'));
@@ -25,12 +28,14 @@ app.set('view engine', '.hbs');
 app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
+app.use(validator());
 app.use(cookieParser());
-app.use(express.static(path.join(__dirname, 'public')));
 app.use(session({secret: 'mysupersecret', resave: false, saveUninitialized: false}));
 app.use(flash());
 app.use(passport.initialize());
 app.use(passport.session());
+app.use(express.static(path.join(__dirname, 'public')));
+
 app.use('/', index);
 app.use('/users', users);
 
