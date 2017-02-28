@@ -9,7 +9,7 @@ var products = [
         imagePath: '../images/solar.jpg',
         title: 'solar Panel',
         description: 'solar panel for 12 V',
-        price: '$50'
+        price: '50'
        
    }),
    
@@ -17,14 +17,14 @@ var products = [
     imagePath: '../images/battery.jpg',
     title: 'Battery',
     description: 'battery ',
-    price: '$50'
+    price: '50'
    
    }),
    new Product({
         imagePath: '../images/controller.jpg',
         title: 'Charge Controller',
         description: 'solar controller for 12 V',
-        price: '$50'
+        price: '50'
        
    })
    
