@@ -3,8 +3,8 @@ var router = express.Router();
 var csurf = require('csurf');
 var passport = require('passport');
 var flash = require('connect-flash');
-var csrfProtection =  csurf();
 
+var csrfProtection =  csurf();
 router.use(csrfProtection);
 
 /* GET users listing. */
@@ -35,8 +35,6 @@ router.post('/signUp', passport.authenticate('local.signup', {
      failureFlash: true 
 }));
 
-
-
 router.get('/signIn', function(req, res, next) {
   
   var messages = req.flash('error');
@@ -49,17 +47,14 @@ router.post('/signIn', passport.authenticate('local.signin', {
      failureFlash: true 
 }));
 
-
-
-
 module.exports = router;
 
- function notLoggedIn(req, res, next) {
+function notLoggedIn(req, res, next) {
 
 	 if (!req.isAuthenticated()) {
          return next();
 	 }
-     res.redirect('/');
+  res.redirect('/');
 }
 
 
